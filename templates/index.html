@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Exchange Rate Finder</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 50px; }
+        h1 { color: #333; }
+        .container { max-width: 600px; margin: 0 auto; text-align: center; }
+        input[type="date"] { padding: 10px; font-size: 16px; width: 200px; }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+        .result { margin-top: 20px; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Find USD/INR Exchange Rate</h1>
+        <form method="POST" action="/">
+            <label for="date">Enter Date (YYYY-MM-DD):</label><br><br>
+            <input type="date" id="date" name="date" required><br><br>
+            <button type="submit">Get Exchange Rate</button>
+        </form>
+
+        {% if exchange_rate %}
+        <div class="result">
+            <h2>Exchange Rate for {{ date }}:</h2>
+            <p><strong>USD/INR: </strong>{{ exchange_rate }}</p>
+            <a href="/download_pdf?date={{ date }}" class="btn">Download PDF</a>
+        </div>
+        {% elif error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
